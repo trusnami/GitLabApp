@@ -3,6 +3,7 @@ package com.example.yugi.gitlabapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
@@ -352,6 +353,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
 //                Log.d("LoginActivity","id is "+person.getId());
 //                Log.d("LoginActivity","name is "+person.getName());
+                String type = person.getType();
+                Intent intent = null;
+                switch (type){
+                    case "student":
+                        intent = new Intent(LoginActivity.this, StudentMainActivity.class);
+                        startActivity(intent);
+                        break;
+                    case "teacher":
+                        intent = new Intent(LoginActivity.this, TeacherMainActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                }
                 finish();
             } else {
 //                mPasswordView.setError(getString(R.string.error_incorrect_password));

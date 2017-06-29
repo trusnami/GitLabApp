@@ -1,6 +1,7 @@
 package com.example.yugi.gitlabapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,16 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.exam_item, parent, false);
         final ExamAdapter.ViewHolder holder = new ExamAdapter.ViewHolder(view);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Exam exam = mExamList.get(position);
+                Intent intent = new Intent(mContext, TeacherExamQuestionActivity.class);
+                intent.putExtra("examId", exam.getId());
+                mContext.startActivity(intent);
+            }
+        });
         return holder;
     }
 

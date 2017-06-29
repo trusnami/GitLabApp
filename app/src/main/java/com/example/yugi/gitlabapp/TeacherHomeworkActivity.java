@@ -56,6 +56,7 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        Toast.makeText(TeacherHomeworkActivity.this,"click any card to view it's questions",Toast.LENGTH_SHORT).show();
     }
 
     public class GetHomeworkTask extends AsyncTask<Void, Void, Boolean> {
@@ -97,19 +98,15 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 examList = gson.fromJson(responseData, new TypeToken<List<Exam>>(){}.getType());
                 if (examList.size() == 0){
-                    Toast.makeText(TeacherHomeworkActivity.this,"sorry,no exams",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeacherHomeworkActivity.this,"sorry,no homework",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.teacher_exam_recycler_view);
-                        GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
-                        recyclerView.setLayoutManager(layoutManager);
-                        adapter = new ExamAdapter(examList);
-                        recyclerView.setAdapter(adapter);
-                    }
-                });
+                TempObjectCollection.examList = examList;
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.teacher_exam_recycler_view);
+                GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
+                recyclerView.setLayoutManager(layoutManager);
+                adapter = new ExamAdapter(examList);
+                recyclerView.setAdapter(adapter);
             } else {
                 Toast.makeText(TeacherHomeworkActivity.this,"internet connect error",Toast.LENGTH_SHORT).show();
             }

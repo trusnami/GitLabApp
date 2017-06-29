@@ -37,7 +37,8 @@
         <activity android:name=".TeacherExamActivity" />
         <activity android:name=".TeacherHomeworkActivity" />
         <activity android:name=".TeacherExerciseActivity" />
-        <activity android:name=".TeacherAssignmentScoreActivity"></activity>
+        <activity android:name=".TeacherAssignmentScoreActivity" />
+        <activity android:name=".TeacherExamQuestionActivity"></activity>
     </application>
 
 </manifest>

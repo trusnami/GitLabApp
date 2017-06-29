@@ -332,10 +332,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     editor = pref.edit();
                     if (rememberPass.isChecked()){
                         editor.putBoolean("remember_password", true);
-                        editor.putString("user", mUser);
-                        editor.putString("password", mPassword);
+
                     } else {
-                      editor.clear();
+                        editor.putBoolean("remember_password", false);
+                    }
+                    editor.putString("user", mUser);
+                    editor.putString("password", mPassword);
+                    editor.putString("type", person.getType());
+                    editor.putString("name", person.getName());
+                    editor.putString("avatar", person.getAvatar());
+                    editor.putString("gender", person.getGender());
+                    editor.putString("email", person.getEmail());
+                    String type = person.getType();
+                    switch (type){
+                        case "student":
+                            editor.putString("gitId", person.getGitId());
+                            editor.putString("number", person.getNumber());
+                            break;
+                        case "teacher":
+                            editor.putString("authority", person.getAuthority());
+                            break;
+                        default:
                     }
                     editor.apply();
                 }

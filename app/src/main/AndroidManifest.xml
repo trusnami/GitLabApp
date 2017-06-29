@@ -31,7 +31,13 @@
         <activity
             android:name=".TeacherMainActivity"
             android:label="@string/title_activity_teacher_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TeacherAllGroupActivity" />
+        <activity android:name=".GroupActivity" />
+        <activity android:name=".TeacherExamActivity" />
+        <activity android:name=".TeacherHomeworkActivity" />
+        <activity android:name=".TeacherExerciseActivity" />
+        <activity android:name=".TeacherAssignmentScoreActivity"></activity>
     </application>
 
 </manifest>

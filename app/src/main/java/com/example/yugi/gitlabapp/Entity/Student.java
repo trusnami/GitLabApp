@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Entity;
 
 /**
  * Created by yugi on 2017/6/28.

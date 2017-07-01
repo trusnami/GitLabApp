@@ -1,5 +1,6 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.teacherActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,54 +12,50 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.example.yugi.gitlabapp.Adapter.AssignmentQuestionAdapter;
+import com.example.yugi.gitlabapp.Entity.AssignmentScore;
+import com.example.yugi.gitlabapp.R;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import java.util.List;
 
-public class TeacherExamActivity extends AppCompatActivity {
+public class TeacherAssignmentQuestionActivity extends AppCompatActivity {
 
-    private GetExamTask getExamTask;
+    private GetAssignmentTask getAssignmentTask;
+    private String assignmentId;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private String username;
     private String password;
-    private String courseId;
-    private List<Exam> examList;
-    private ExamAdapter adapter;
     private String responseData = null;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private AssignmentScore assignmentScore;
+    private List<AssignmentScore.QuestionsBean> questionsList;
+    private AssignmentQuestionAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_exam);
+        setContentView(R.layout.activity_teacher_assignment_question);
+        getSupportActionBar().hide();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         username = pref.getString("username", "liuqin");
         password = pref.getString("password", "123");
-        courseId = "2";
+        Intent intent = getIntent();
+        assignmentId = intent.getStringExtra("assignmentId");
+        getAssignmentTask = new GetAssignmentTask();
+        getAssignmentTask.execute();
 
-        getExamTask = new GetExamTask();
-        getExamTask.execute();
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.teacher_exam_swipe_refresh);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getExamTask = new GetExamTask();
-                getExamTask.execute((Void)null);
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        Toast.makeText(TeacherExamActivity.this,"click any card to view it's questions",Toast.LENGTH_SHORT).show();
+        Toast.makeText(TeacherAssignmentQuestionActivity.this,"click any card to view it's score list",Toast.LENGTH_SHORT).show();
     }
 
-    public class GetExamTask extends AsyncTask<Void, Void, Boolean> {
+    public class GetAssignmentTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -67,7 +64,7 @@ public class TeacherExamActivity extends AppCompatActivity {
             try {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
-                URL url = new URL("http://115.29.184.56:8090/api/course/" + courseId + "/exam");
+                URL url = new URL("http://115.29.184.56:8090/api/assignment/" + assignmentId + "/score");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.addRequestProperty("Authorization", "Basic" + " " + token);
                 connection.setRequestMethod("GET");
@@ -92,23 +89,24 @@ public class TeacherExamActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            getExamTask = null;
+            getAssignmentTask = null;
             if (success) {
                 Gson gson = new Gson();
-                examList = gson.fromJson(responseData, new TypeToken<List<Exam>>(){}.getType());
-                if (examList.size() == 0){
-                    Toast.makeText(TeacherExamActivity.this,"sorry,no exams",Toast.LENGTH_SHORT).show();
+                assignmentScore = gson.fromJson(responseData, AssignmentScore.class);
+                questionsList = assignmentScore.getQuestions();
+                if (questionsList.size() == 0) {
+                    Toast.makeText(TeacherAssignmentQuestionActivity.this,"sorry,no questions",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                TempObjectCollection.examList = examList;
-                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.teacher_exam_recycler_view);
-                GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.teacher_assignment_question_recycler_view);
+                GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
                 recyclerView.setLayoutManager(layoutManager);
-                adapter = new ExamAdapter(examList);
+                adapter = new AssignmentQuestionAdapter(assignmentScore.getQuestions());
                 recyclerView.setAdapter(adapter);
             } else {
-                Toast.makeText(TeacherExamActivity.this,"internet connect error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherAssignmentQuestionActivity.this,"internet connect error",Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 }

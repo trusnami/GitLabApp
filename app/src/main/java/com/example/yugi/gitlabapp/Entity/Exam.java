@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Entity;
 
 import java.util.List;
 

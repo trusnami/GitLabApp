@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.yugi.gitlabapp.Entity.Group;
+import com.example.yugi.gitlabapp.R;
+import com.example.yugi.gitlabapp.teacherActivity.GroupActivity;
 
 import java.util.List;
 

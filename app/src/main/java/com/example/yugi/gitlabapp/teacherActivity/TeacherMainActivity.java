@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.teacherActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.yugi.gitlabapp.LoginActivity;
+import com.example.yugi.gitlabapp.R;
+
 public class TeacherMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +31,7 @@ public class TeacherMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main);
+//        getSupportActionBar().hide();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         username = pref.getString("username", "liuqin");
         password = pref.getString("password", "123");
@@ -79,7 +83,10 @@ public class TeacherMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.teacher_logout) {
+            Intent intent = new Intent(TeacherMainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
@@ -126,9 +133,12 @@ public class TeacherMainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(TeacherMainActivity.this, TeacherAssignmentCheckActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);

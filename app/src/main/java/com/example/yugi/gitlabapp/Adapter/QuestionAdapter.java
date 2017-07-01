@@ -1,12 +1,18 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.yugi.gitlabapp.Entity.Exam;
+import com.example.yugi.gitlabapp.R;
+import com.example.yugi.gitlabapp.TempObjectCollection;
+import com.example.yugi.gitlabapp.teacherActivity.CreatorInfoActivity;
 
 import java.util.List;
 
@@ -30,7 +36,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.exam_question_item, parent, false);
-        return new ViewHolder(view);
+        final QuestionAdapter.ViewHolder holder = new QuestionAdapter.ViewHolder(view);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Exam.QuestionsBean question = mQuestionList.get(position);
+                TempObjectCollection.creator = question.getCreator();
+                Intent intent = new Intent(mContext, CreatorInfoActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+        return holder;
     }
 
     @Override

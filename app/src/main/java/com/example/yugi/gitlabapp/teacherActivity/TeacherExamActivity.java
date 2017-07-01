@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.teacherActivity;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -11,6 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.example.yugi.gitlabapp.Adapter.ExamAdapter;
+import com.example.yugi.gitlabapp.Entity.Exam;
+import com.example.yugi.gitlabapp.R;
+import com.example.yugi.gitlabapp.TempObjectCollection;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -21,9 +25,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class TeacherHomeworkActivity extends AppCompatActivity {
+public class TeacherExamActivity extends AppCompatActivity {
 
-    private GetHomeworkTask getHomeworkTask;
+    private GetExamTask getExamTask;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private String username;
@@ -37,29 +41,29 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_exam);
-
+        getSupportActionBar().hide();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         username = pref.getString("username", "liuqin");
         password = pref.getString("password", "123");
         courseId = "2";
 
-        getHomeworkTask = new GetHomeworkTask();
-        getHomeworkTask.execute();
+        getExamTask = new GetExamTask();
+        getExamTask.execute();
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.teacher_exam_swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getHomeworkTask = new GetHomeworkTask();
-                getHomeworkTask.execute((Void)null);
+                getExamTask = new GetExamTask();
+                getExamTask.execute((Void)null);
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        Toast.makeText(TeacherHomeworkActivity.this,"click any card to view it's questions",Toast.LENGTH_SHORT).show();
+        Toast.makeText(TeacherExamActivity.this,"click any card to view it's questions",Toast.LENGTH_SHORT).show();
     }
 
-    public class GetHomeworkTask extends AsyncTask<Void, Void, Boolean> {
+    public class GetExamTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -68,7 +72,7 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
             try {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
-                URL url = new URL("http://115.29.184.56:8090/api/course/" + courseId + "/homework");
+                URL url = new URL("http://115.29.184.56:8090/api/course/" + courseId + "/exam");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.addRequestProperty("Authorization", "Basic" + " " + token);
                 connection.setRequestMethod("GET");
@@ -93,12 +97,12 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            getHomeworkTask = null;
+            getExamTask = null;
             if (success) {
                 Gson gson = new Gson();
                 examList = gson.fromJson(responseData, new TypeToken<List<Exam>>(){}.getType());
                 if (examList.size() == 0){
-                    Toast.makeText(TeacherHomeworkActivity.this,"sorry,no homework",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeacherExamActivity.this,"sorry,no relative data",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 TempObjectCollection.examList = examList;
@@ -108,7 +112,7 @@ public class TeacherHomeworkActivity extends AppCompatActivity {
                 adapter = new ExamAdapter(examList);
                 recyclerView.setAdapter(adapter);
             } else {
-                Toast.makeText(TeacherHomeworkActivity.this,"internet connect error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherExamActivity.this,"internet connect error",Toast.LENGTH_SHORT).show();
             }
         }
     }

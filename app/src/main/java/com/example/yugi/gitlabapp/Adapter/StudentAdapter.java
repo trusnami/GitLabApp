@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Adapter;
 
 import android.content.Context;
         import android.support.v7.widget.CardView;
@@ -6,10 +6,12 @@ import android.content.Context;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.widget.TextView;
 
-        import java.util.List;
+import com.example.yugi.gitlabapp.Entity.Student;
+import com.example.yugi.gitlabapp.R;
+
+import java.util.List;
 
 /**
  * Created by yugi on 2017/6/28.

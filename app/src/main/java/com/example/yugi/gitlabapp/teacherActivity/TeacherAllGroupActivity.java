@@ -1,27 +1,14 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.teacherActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import android.util.Base64;
 import android.widget.Toast;
@@ -34,6 +21,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.yugi.gitlabapp.Entity.Group;
+import com.example.yugi.gitlabapp.Adapter.GroupAdapter;
+import com.example.yugi.gitlabapp.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -53,6 +43,7 @@ public class TeacherAllGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_all_group);
+        getSupportActionBar().hide();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         username = pref.getString("username", "liuqin");
         password = pref.getString("password", "123");
@@ -101,7 +92,7 @@ public class TeacherAllGroupActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.d("TeacherAllGroupActivity", "responseData:"+responseData);
+//            Log.d("TeacherAllGroupActivity", "responseData:"+responseData);
             if (responseData != null) {
                 return true;
             }

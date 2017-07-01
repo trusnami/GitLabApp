@@ -1,4 +1,4 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.yugi.gitlabapp.Entity.Exam;
+import com.example.yugi.gitlabapp.R;
+import com.example.yugi.gitlabapp.teacherActivity.TeacherExamQuestionActivity;
+import com.example.yugi.gitlabapp.TempObjectCollection;
 
 import java.util.List;
 
@@ -37,6 +42,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Exam exam = mExamList.get(position);
+                TempObjectCollection.exam = exam;
                 Intent intent = new Intent(mContext, TeacherExamQuestionActivity.class);
                 intent.putExtra("examId", exam.getId());
                 mContext.startActivity(intent);

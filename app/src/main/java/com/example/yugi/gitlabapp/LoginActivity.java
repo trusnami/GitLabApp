@@ -19,7 +19,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,11 +30,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yugi.gitlabapp.Entity.Person;
+import com.example.yugi.gitlabapp.studentActivity.StudentMainActivity;
+import com.example.yugi.gitlabapp.teacherActivity.TeacherMainActivity;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
+        getSupportActionBar().hide();
 //        populateAutoComplete();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         mPasswordView = (EditText) findViewById(R.id.password);

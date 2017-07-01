@@ -25,20 +25,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StudentMainActivity"
+            android:name=".studentActivity.StudentMainActivity"
             android:label="@string/title_activity_student_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TeacherMainActivity"
+            android:name=".teacherActivity.TeacherMainActivity"
             android:label="@string/title_activity_teacher_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TeacherAllGroupActivity" />
-        <activity android:name=".GroupActivity" />
-        <activity android:name=".TeacherExamActivity" />
-        <activity android:name=".TeacherHomeworkActivity" />
-        <activity android:name=".TeacherExerciseActivity" />
-        <activity android:name=".TeacherAssignmentScoreActivity" />
-        <activity android:name=".TeacherExamQuestionActivity"></activity>
+        <activity android:name=".teacherActivity.TeacherAllGroupActivity" />
+        <activity android:name=".teacherActivity.GroupActivity" />
+        <activity android:name=".teacherActivity.TeacherExamActivity" />
+        <activity android:name=".teacherActivity.TeacherHomeworkActivity" />
+        <activity android:name=".teacherActivity.TeacherExerciseActivity" />
+        <activity android:name=".teacherActivity.TeacherAssignmentQuestionActivity" />
+        <activity android:name=".teacherActivity.TeacherExamQuestionActivity" />
+        <activity
+            android:name=".teacherActivity.CreatorInfoActivity"
+            android:label="@string/title_activity_creater_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".teacherActivity.TeacherAssignmentCheckActivity" />
+        <activity android:name=".teacherActivity.TeacherScoreListActivity" />
+        <activity android:name=".studentActivity.StudentAssignmentCheckActivity" />
+        <activity android:name=".studentActivity.QuestionListActivity" />
+        <activity android:name=".studentActivity.ReadMeCheckActivity" />
+        <activity android:name=".studentActivity.ReadMeActivity" />
+        <activity android:name=".studentActivity.ResultActivity" />
+        <activity android:name=".studentActivity.TestcaseActivity"></activity>
     </application>
 
 </manifest>

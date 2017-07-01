@@ -1,9 +1,7 @@
-package com.example.yugi.gitlabapp;
+package com.example.yugi.gitlabapp.studentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.yugi.gitlabapp.LoginActivity;
+import com.example.yugi.gitlabapp.R;
+import com.example.yugi.gitlabapp.teacherActivity.TeacherExamActivity;
 
 public class StudentMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,15 +24,6 @@ public class StudentMainActivity extends AppCompatActivity
         setContentView(R.layout.activity_student_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.teacher_allgroup_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,7 +60,10 @@ public class StudentMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.student_logout) {
+            Intent intent = new Intent(StudentMainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
@@ -80,18 +76,44 @@ public class StudentMainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_student_exam) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(StudentMainActivity.this, TeacherExamActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_student_exercise) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(StudentMainActivity.this, TeacherExamActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_student_homework) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(StudentMainActivity.this, TeacherExamActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_student_readme) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(StudentMainActivity.this, ReadMeCheckActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_student_analysis) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            Intent intent = new Intent(StudentMainActivity.this, StudentAssignmentCheckActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.teacher_main_drawer_layout);

@@ -1,5 +1,12 @@
 package com.example.yugi.gitlabapp;
 
+import com.example.yugi.gitlabapp.Entity.Analysis;
+import com.example.yugi.gitlabapp.Entity.AssignmentScore;
+import com.example.yugi.gitlabapp.Entity.Exam;
+import com.example.yugi.gitlabapp.Entity.Group;
+import com.example.yugi.gitlabapp.Entity.Person;
+import com.example.yugi.gitlabapp.Entity.Student;
+
 import java.util.List;
 
 /**
@@ -8,22 +15,20 @@ import java.util.List;
 
 public class TempObjectCollection {
 
-    public static AssignmentScore assignmentScore = null;
-
     public static Exam.QuestionsBean.CreatorBean creator = null;
 
     public static List<Exam> examList = null;
 
-    public static Exam homework = null;
+    public static Exam exam = null;
 
-    public static Exam exercise = null;
+    public static List<AssignmentScore.QuestionsBean.StudentsBean> studentsBeanList = null;
 
-    public static Group group = null;
+    public static Analysis.QuestionResultsBean.MetricDataBean metricData = null;
 
-    public static Person person = null;
+    public static Analysis.QuestionResultsBean.TestResultBean testResult = null;
 
-    public static Exam.QuestionsBean question = null;
+    public static Analysis.QuestionResultsBean.ScoreResultBean scoreResult = null;
 
-    public static Student student = null;
+    public static List<Analysis.QuestionResultsBean.TestResultBean.TestcasesBean> testcasesBeanList = null;
 
 }

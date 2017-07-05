@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:maxLines="1"
-        android:hint="assginment id"/>
+        android:hint="assginment:38"/>
 
     <EditText
         android:id="@+id/student_student_id_edit_text"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:maxLines="1"
-        android:hint="student id"/>
+        android:hint="student:237"/>
 
     <Button
         android:id="@+id/student_check_score_button"

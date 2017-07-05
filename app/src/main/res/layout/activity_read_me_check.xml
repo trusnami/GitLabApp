@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:maxLines="1"
-        android:hint="assginment id"/>
+        android:hint="assginment:98"/>
 
     <EditText
         android:id="@+id/student_readme_qeustion_id_edit_text"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:maxLines="1"
-        android:hint="question id"/>
+        android:hint="question:26"/>
 
     <Button
         android:id="@+id/student_readme_score_button"

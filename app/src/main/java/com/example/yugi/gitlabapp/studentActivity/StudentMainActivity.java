@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import com.example.yugi.gitlabapp.LoginActivity;
 import com.example.yugi.gitlabapp.R;
 import com.example.yugi.gitlabapp.teacherActivity.TeacherExamActivity;
+import com.example.yugi.gitlabapp.teacherActivity.TeacherExerciseActivity;
+import com.example.yugi.gitlabapp.teacherActivity.TeacherHomeworkActivity;
 
 public class StudentMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,7 +90,7 @@ public class StudentMainActivity extends AppCompatActivity
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             }
-            Intent intent = new Intent(StudentMainActivity.this, TeacherExamActivity.class);
+            Intent intent = new Intent(StudentMainActivity.this, TeacherExerciseActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_student_homework) {
@@ -96,7 +98,7 @@ public class StudentMainActivity extends AppCompatActivity
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             }
-            Intent intent = new Intent(StudentMainActivity.this, TeacherExamActivity.class);
+            Intent intent = new Intent(StudentMainActivity.this, TeacherHomeworkActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_student_readme) {
